@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const vehicleSchema = z.object({
+export const vehicleSchema = z.object({
   model: z.string()
     .min(3, { message: 'Model must be 3 or more characters long' }),
   year: z.number().gte(1900, { message: 'Year must be bigger or equal 1900' })
