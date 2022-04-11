@@ -16,6 +16,6 @@ const carSchema = z.object({
     .lte(7, { message: 'Year must be less or equal 4' }),
 });
 
-const VehicleCar = carSchema.and(vehicleSchema);
+export const VehicleCar = carSchema.and(vehicleSchema);
 
 export type Car = z.infer<typeof VehicleCar>;
