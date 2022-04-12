@@ -25,4 +25,37 @@ describe('Car Model', () => {
       expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
     });
   })
+
+  describe('Lista todos os carros', () => {
+    before(() => {
+      Sinon.stub(carModel, 'read').resolves(mockModelCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um array de objetos', async () => {
+      const car = await carModel.read();
+      expect(car).to.be.an('array');
+      expect(car).to.have.length(1);
+      expect(car[0]).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
+
+  describe('Lista um carro a partir do id ', () => {
+    before(() => {
+      Sinon.stub(carModel, 'readOne').resolves(mockResolvesCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const car = await carModel.readOne(mockResolvesCar._id);
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
 })

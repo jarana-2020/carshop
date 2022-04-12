@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 import chai from 'chai';
 import chaiHttp = require('chai-http');
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import CarService from '../../../services/CarService';
 import { mockResolvesCar, objCar } from '../../mocks/mocks';
 import Sinon = require('sinon');
@@ -16,16 +16,18 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const carService = new CarService();
 const carController = new CarController();
+const mockModelCar = [mockResolvesCar];
 
-describe('Controller Car', () => {
+describe('Testa o Controller Car', () => {
 
-  const response = {} as Response;
-  const request = {} as RequestWithBody<typeof objCar>
+  describe('Testa o metodo create', () => {
 
-  describe('Retorna os dados do Carro em caso de sucesso', () => {
+    const response = {} as Response;
+    const request = {} as RequestWithBody<typeof objCar>
+
     before(async () => {
       sinon
-        .stub(carService, 'create')
+        .stub(carController.service, 'create')
         .resolves(mockResolvesCar);
 
       response.status = sinon.stub()
@@ -41,9 +43,72 @@ describe('Controller Car', () => {
 
     it('Retorna o status 201', async() => {
       const car = await carController.create(request, response)
-      console.log(car);
       
       expect((response.status as Sinon.SinonStub).calledWith(201));
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    })
+  })
+
+  describe('Testa o metodo read', () => {
+
+    const response = {} as Response;
+    const request = {} as RequestWithBody<typeof objCar>
+
+    before(async () => {
+      sinon
+        .stub(carController.service, 'read')
+        .resolves(mockModelCar);
+
+      response.status = sinon.stub()
+        .returns(response)
+
+      response.json = sinon.stub()
+        .returns(mockModelCar);
+    });
+  
+    after(()=>{
+      Sinon.restore();
+    })
+
+    it('Retorna o status 201', async() => {
+      const car = await carController.read(request, response);
+      
+      
+      expect((response.status as Sinon.SinonStub).calledWith(201));
+      expect(car).to.be.an('array');
+      expect(car).to.have.length(1);
+      // expect(car[0]).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    })
+  })
+
+  describe('Testa o metodo readOne', () => {
+
+    const response = {} as Response;
+    const request = {} as Request<{ id: string }>
+
+    before(async () => {
+      sinon
+        .stub(carController.service, 'readOne')
+        .resolves(mockResolvesCar);
+
+      response.status = sinon.stub()
+        .returns(response)
+
+      response.json = sinon.stub()
+        .returns(mockResolvesCar);
+    });
+  
+    after(()=>{
+      Sinon.restore();
+    })
+
+    it('Retorna o status 200', async() => {
+      request.params = { id: mockResolvesCar._id }
+      const car = await carController.readOne(request, response);
+      
+      
+      expect((response.status as Sinon.SinonStub).calledWith(200));
       expect(car).to.be.an('object');
       expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
     })
