@@ -40,10 +40,6 @@ class CarController extends Controller<Car> {
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     const { id } = req.params;
-    const regEx = /^[0-9a-f]{24}$/;
-    if (!regEx.test(id)) {
-      return res.status(400).json({ error: this.errors.invalidId });
-    }
     try {
       const car = await this.service.readOne(id);
       return car 
