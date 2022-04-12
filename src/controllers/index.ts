@@ -16,6 +16,8 @@ export interface RequestWithBody<T> extends Request {
 }
 
 abstract class Controller<T> {
+  abstract route: string;
+
   protected errors = ControllerErrors;
 
   constructor(protected service: Service<T>) {}
