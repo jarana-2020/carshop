@@ -49,6 +49,21 @@ class CarController extends Controller<Car> {
       return res.status(500).json({ error: this.errors.internal });
     }
   };
+
+  update = async (
+    req: Request<{ id: string }>,
+    res: Response<Car | ResponseError>,
+  ): Promise<typeof res> => {
+    const { body } = req;
+    const { id } = req.params;
+    try {
+      const car = await this.service.update(id, body);
+      if (!car) return res.status(404).json({ error: this.errors.notFound });
+      return res.status(200).json(car);
+    } catch (error) {
+      return res.status(500).json({ error: this.errors.internal });
+    }
+  };
 }
 
 export default CarController;

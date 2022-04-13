@@ -45,10 +45,10 @@ abstract class Controller<T> {
     res: Response<T | ResponseError>
   ): Promise<typeof res>;
 
-  // abstract update(
-  //   req: Request<{ id: string, obj: object }>,
-  //   res: Response<T | ResponseError>,
-  // ): Promise<typeof res>;
+  abstract update(
+    req: Request<{ id: string; }, unknown >,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res>;
 
   // abstract delete(
   //   req: Request<{ id: string; }>,
