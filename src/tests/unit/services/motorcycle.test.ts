@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 import Sinon from 'sinon';
-import { VehicleCar } from '../../../interfaces/CarInterface';
-import MotorcycleModel from '../../../models/Motorcycle';
+import { VehicleMotorcycle } from '../../../interfaces/MotorcycleInterface';
 import MotorcycleService from '../../../services/MotorcycleService';
-import { errorsZod, mockResolvesCar, mockResolvesMotorcycle, objCar, objMotorcycle } from '../../mocks/mocks';
+import { errorsZod, mockResolvesMotorcycle, objMotorcycle } from '../../mocks/mocks';
 
 describe('Car Service', () => {
   let serviceMotorcycle = new MotorcycleService();
@@ -96,33 +95,33 @@ describe('Car Service', () => {
   })
 })
 
-// describe('Service Car em caso de falha', () => {
+describe('Service Car em caso de falha', () => {
 
-//   let serviceMotorcycle = new MotorcycleService();
+  let serviceMotorcycle = new MotorcycleService();
 
-//   before(() => {
-//     Sinon.stub(VehicleCar, 'safeParse').returns(errorsZod as never);
-//   });
+  before(() => {
+    Sinon.stub(VehicleMotorcycle, 'safeParse').returns(errorsZod as never);
+  });
 
-//   after(() => {
-//     Sinon.restore();
-//   });
+  after(() => {
+    Sinon.restore();
+  });
 
-//   it('retorna um objeto com uma chave erro', async () => {
-//     const car = await serviceMotorcycle.create(objCar);
-//     expect(car).to.be.an('object');
-//     expect(car).contain.keys('error');
-//   });
+  it('retorna um objeto com uma chave erro', async () => {
+    const car = await serviceMotorcycle.create(objMotorcycle);
+    expect(car).to.be.an('object');
+    expect(car).contain.keys('error');
+  });
 
-// })
+})
 
 // describe('Testa o create do Service Genérico', () => {
   
-//   const carModel = new CarModel();
-//   let serviceMotorcycle = new Service(carModel);
+//   const motorcycleModel = new MotorcycleModel();
+//   let serviceMotorcycle = new Service(motorcycleModel);
 
 //   before(() => {
-//     Sinon.stub(serviceMotorcycle.model,'create').resolves(objCar);
+//     Sinon.stub(serviceMotorcycle.model,'create').resolves(objMotorcycle);
 //   });
 
 //   after(() => {
@@ -130,7 +129,7 @@ describe('Car Service', () => {
 //   });
 
 //   it('retorna um objeto com uma chave erro', async () => {
-//     const car = await serviceMotorcycle.create(objCar);
+//     const car = await serviceMotorcycle.create(objMotorcycle);
 //     expect(car).to.be.an('object');
 //   })
 // })

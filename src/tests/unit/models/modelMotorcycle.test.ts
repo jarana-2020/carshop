@@ -66,9 +66,9 @@ describe('Motorcycle Model', () => {
     });
 
     it('Deve retornar um objeto', async () => {
-      const car = await motorcycleModel.update(mockResolvesMotorcycle._id, objMotorcycle);
-      expect(car).to.be.an('object');
-      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+      const motorcycle = await motorcycleModel.update(mockResolvesMotorcycle._id, objMotorcycle);
+      expect(motorcycle).to.be.an('object');
+      expect(motorcycle).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'category', 'engineCapacity');
     });
   })
 
@@ -82,9 +82,9 @@ describe('Motorcycle Model', () => {
     });
 
     it('Deve retornar um objeto', async () => {
-      const car = await motorcycleModel.delete(mockResolvesMotorcycle._id);
-      expect(car).to.be.an('object');
-      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+      const motorcycle = await motorcycleModel.delete(mockResolvesMotorcycle._id);
+      expect(motorcycle).to.be.an('object');
+      expect(motorcycle).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'category', 'engineCapacity');
     });
   })
 
