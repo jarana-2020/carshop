@@ -114,4 +114,36 @@ describe('Testa o Controller Car', () => {
     })
   })
 
+  describe('Testa o método update', () => {
+
+    const response = {} as Response;
+    const request = {} as Request<{ id: string; }, unknown >
+
+    before(async () => {
+      sinon
+        .stub(carController.service, 'update')
+        .resolves(mockResolvesCar);
+
+      response.status = sinon.stub()
+        .returns(response)
+
+      response.json = sinon.stub()
+        .returns(mockResolvesCar);
+    });
+  
+    after(()=>{
+      Sinon.restore();
+    })
+
+    it('Retorna o status 201', async() => {
+      request.params = { id: mockResolvesCar._id }
+      const car = await carController.update(request, response);
+      
+      
+      expect((response.status as Sinon.SinonStub).calledWith(201));
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    })
+  })
+
 });

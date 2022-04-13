@@ -1,15 +1,13 @@
 import { expect } from 'chai';
-import mongoose from 'mongoose';
 import Sinon from 'sinon';
 import CarModel from '../../../models/Car';
-import MongoModel from '../../../models/MongoModel';
-import { errorsZod, mockResolvesCar, objCar } from '../../mocks/mocks';
+import { mockResolvesCar, objCar } from '../../mocks/mocks';
 
 describe('Car Model', () => {
   let carModel = new CarModel();
   const mockModelCar = [mockResolvesCar];
 
-  describe('#Cria um objeto Car com sucesso', () => {
+  describe('#Testa o método create', () => {
 
     before(() => {
       Sinon.stub(carModel, 'create').resolves(mockResolvesCar);
@@ -26,7 +24,7 @@ describe('Car Model', () => {
     });
   })
 
-  describe('Lista todos os carros', () => {
+  describe('Testa o método read', () => {
     before(() => {
       Sinon.stub(carModel, 'read').resolves(mockModelCar);
     });
@@ -43,7 +41,7 @@ describe('Car Model', () => {
     });
   })
 
-  describe('Lista um carro a partir do id ', () => {
+  describe('Testa o método readOne', () => {
     before(() => {
       Sinon.stub(carModel, 'readOne').resolves(mockResolvesCar);
     });
@@ -54,6 +52,38 @@ describe('Car Model', () => {
 
     it('Deve retornar um objeto', async () => {
       const car = await carModel.readOne(mockResolvesCar._id);
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
+
+  describe('Testa o método update', () => {
+    before(() => {
+      Sinon.stub(carModel, 'update').resolves(mockResolvesCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const car = await carModel.update(mockResolvesCar._id, objCar);
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
+
+  describe('Testa o método delete', () => {
+    before(() => {
+      Sinon.stub(carModel, 'delete').resolves(mockResolvesCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const car = await carModel.delete(mockResolvesCar._id);
       expect(car).to.be.an('object');
       expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
     });

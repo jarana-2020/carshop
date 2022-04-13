@@ -61,4 +61,21 @@ describe('Car Service', () => {
       expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
     });
   })
+
+  describe('#Testa o metodo update', () => {
+
+    before(() => {
+      Sinon.stub(serviceCar.model, 'update').resolves(mockResolvesCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const car = await serviceCar.update(mockResolvesCar._id, objCar);
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
 })
