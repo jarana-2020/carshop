@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import Sinon from 'sinon';
 import { VehicleCar } from '../../../interfaces/CarInterface';
 import CarModel from '../../../models/Car';
+import Service from '../../../services';
 import CarService from '../../../services/CarService';
 import { errorsZod, mockResolvesCar, objCar } from '../../mocks/mocks';
 
@@ -113,5 +114,25 @@ describe('Service Car em caso de falha', () => {
     const car = await serviceCar.create(objCar);
     expect(car).to.be.an('object');
     expect(car).contain.keys('error');
+  });
+
+})
+
+describe('Testa o create do Service Genérico', () => {
+  
+  const carModel = new CarModel();
+  let serviceCar = new Service(carModel);
+
+  before(() => {
+    Sinon.stub(serviceCar.model,'create').resolves(objCar);
+  });
+
+  after(() => {
+    Sinon.restore();
+  });
+
+  it('retorna um objeto com uma chave erro', async () => {
+    const car = await serviceCar.create(objCar);
+    expect(car).to.be.an('object');
   })
 })
