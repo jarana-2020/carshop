@@ -52,7 +52,7 @@ abstract class Controller<T> {
 
   abstract delete(
     req: Request<{ id: string; }>,
-    res: Response<T | ResponseError>
+    res: Response<T | ResponseError >
   ): Promise<typeof res>;
 }
 
