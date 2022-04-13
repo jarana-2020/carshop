@@ -78,4 +78,21 @@ describe('Car Service', () => {
       expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
     });
   })
+
+  describe('#Testa o metodo delete', () => {
+
+    before(() => {
+      Sinon.stub(serviceCar.model, 'delete').resolves(mockResolvesCar);
+    });
+
+    after(() => {
+      Sinon.restore();
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const car = await serviceCar.delete(mockResolvesCar._id);
+      expect(car).to.be.an('object');
+      expect(car).to.contain.keys('_id', 'model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty');
+    });
+  })
 })

@@ -146,4 +146,34 @@ describe('Testa o Controller Car', () => {
     })
   })
 
+  describe('Testa o método delete', () => {
+
+    const response = {} as Response;
+    const request = {} as Request<{ id: string; }>
+
+    before(async () => {
+      sinon
+        .stub(carController.service, 'delete')
+        .resolves(mockResolvesCar);
+
+      response.status = sinon.stub()
+        .returns(response)
+
+      response.json = sinon.stub()
+        .returns(mockResolvesCar);
+    });
+  
+    after(()=>{
+      Sinon.restore();
+    })
+
+    it('Retorna o status 204', async() => {
+      request.params = { id: mockResolvesCar._id }
+       await carController.delete(request, response);
+      
+      
+      expect((response.status as Sinon.SinonStub).calledWith(204));
+    })
+  })
+
 });
