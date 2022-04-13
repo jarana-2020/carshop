@@ -1,3 +1,6 @@
+import { IIndexable } from "../../interfaces/indexable"
+import { Motorcycle } from "../../interfaces/MotorcycleInterface"
+
 export const mockResolvesCar = {
   _id: '1',
   model: "Ferrari",
@@ -6,6 +9,25 @@ export const mockResolvesCar = {
   buyValue: 2000000,
   doorsQty: 2,
   seatsQty: 2,
+}
+
+export const mockResolvesMotorcycle: IIndexable = {
+  _id: '00a5f66ry9900a5f66ry99oo',
+  model: 'Honda CG Titan 125',
+  year: 1963,
+  color: 'red',
+  buyValue: 3500,
+  category: 'Street',
+  engineCapacity: 125
+}
+
+export const objMotorcycle: Motorcycle = {
+  model: 'Honda CG Titan 125',
+  year: 1963,
+  color: 'red',
+  buyValue: 3500,
+  category: 'Street',
+  engineCapacity: 125
 }
 
 export const objCar = {
