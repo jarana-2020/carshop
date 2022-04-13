@@ -12,7 +12,7 @@ const motorcycleSchema = new Schema<MotorcycleDocument>({
   buyValue: Number,
   category: String,
   engineCapacity: Number,
-});
+}, { versionKey: false });
 
 class MotorcycleModel extends MongoModel<Motorcycle> {
   constructor(model = createModel('Motorcycles', motorcycleSchema)) {
