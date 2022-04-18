@@ -14,8 +14,8 @@ Neste projeto, foram aplicados os seguintes aprendizados:
 ---
 
 ## Deploy da Aplicação
-Segue abaixo o link do deploy da aplicação, o mesmo foi realizado utilizando Heroku e Atlas MongoDB.
-https://shop-car-001.herokuapp.com/
+Segue abaixo o link do deploy da aplicação, o mesmo foi realizado utilizando Heroku e Atlas MongoDB:
+- https://shop-car-001.herokuapp.com/
 
 ---
 
