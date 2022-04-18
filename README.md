@@ -13,6 +13,16 @@ Neste projeto, foram aplicados os seguintes aprendizados:
 
 ---
 
+## Deploy da Aplicação
+Segue abaixo o link do deploy da aplicação, o mesmo foi realizado utilizando Heroku e Atlas MongoDB.
+https://shop-car-001.herokuapp.com/
+
+---
+
+## Testes
+Para rodar os testes da aplicação deve-se usar o comando npm run test:dev.
+
+
 ## O que foi desenvolvido
 
 Para este projeto, foram aplicados os princípios de `POO` para a contrução de uma API com `CRUD` para gerenciar uma concessionária de veículos utilizando o banco de dados `MongoDB`.
